@@ -31,6 +31,20 @@
       padding: 10px;
       font-size: 14px;
     }
+
+    /* CSS for dropdowns */
+    .dropdown-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .dropdown-select {
+      margin-right: 10px;
+    }
+
+    .dropdown-button {
+      margin-left: 10px;
+    }
   </style>
 </head>
 <body>
@@ -66,7 +80,7 @@
           "name": "niedrozne",
           "parts": [
             {
-              "text": "Drobne pogrubienia błon śluzowych zatok czolowych od strony zachylków zębodolowych."
+              "text": "Zachyłki zębodolowe niedrożne na tle pogrubień błon śluzowych."
             }
           ]
         }
@@ -121,7 +135,7 @@
               ]
             },
             {
-              "text": "Po stronie lewej 5mm - typ II"
+              "text": "Po stronie lewej 5mm- typ II"
             }
           ]
         }
@@ -145,7 +159,7 @@
       // Remove previous buttons
       buttonsContainer.innerHTML = '';
 
-      // Create buttons for each "text" key in the current slide
+      // Create buttons for each "text" key and dropdowns for each "choices" key in the current slide
       const slide = jsonData[keys[currentIndex]];
       if (slide) {
         slide.forEach((item) => {
@@ -158,6 +172,30 @@
                   commentTextarea.value += part.text + '\n';
                 });
                 buttonsContainer.appendChild(button);
+              } else if (part.choices) {
+                const dropdownContainer = document.createElement('div');
+                dropdownContainer.classList.add('dropdown-container');
+
+                const dropdownSelect = document.createElement('select');
+                dropdownSelect.classList.add('dropdown-select');
+                part.choices.forEach((choice) => {
+                  const option = document.createElement('option');
+                  option.value = choice;
+                  option.textContent = choice;
+                  dropdownSelect.appendChild(option);
+                });
+                dropdownContainer.appendChild(dropdownSelect);
+
+                const okButton = document.createElement('button');
+                okButton.textContent = 'OK';
+                okButton.classList.add('dropdown-button');
+                okButton.addEventListener('click', () => {
+                  const selectedValue = dropdownSelect.value;
+                  commentTextarea.value += selectedValue + '\n';
+                });
+                dropdownContainer.appendChild(okButton);
+
+                buttonsContainer.appendChild(dropdownContainer);
               }
             });
           }
