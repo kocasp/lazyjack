@@ -64,7 +64,8 @@
           "name": "droznosc",
           "parts": [
             {
-              "text": "Zatoki czołowe o zachowanej powietrzności, zachyłki czołowe o zachowanej drożności."
+              "text": "Zatoki czołowe o zachowanej powietrzności, zachyłki czołowe o zachowanej drożności.",
+              "newline": false
             }
           ]
         },
@@ -72,7 +73,8 @@
           "name": "pogrubienia",
           "parts": [
             {
-              "text": "Drobne pogrubienia błon śluzowych zatok czolowych od strony zachylków zębodolowych."
+              "text": "Drobne pogrubienia błon śluzowych zatok czolowych od strony zachylków zębodolowych.",
+              "newline": true
             }
           ]
         },
@@ -80,7 +82,8 @@
           "name": "niedrozne",
           "parts": [
             {
-              "text": "Zachyłki zębodolowe niedrożne na tle pogrubień błon śluzowych."
+              "text": "Zachyłki zębodolowe niedrożne na tle pogrubień błon śluzowych.",
+              "newline": true
             }
           ]
         }
@@ -90,7 +93,8 @@
           "name": "zachowane",
           "parts": [
             {
-              "text": "Sitowie o zachowanej powietrzności."
+              "text": "Sitowie o zachowanej powietrzności.",
+              "newline": true
             }
           ]
         },
@@ -98,7 +102,8 @@
           "name": "pogrubienia",
           "parts": [
             {
-              "text": "Drobne pogrubienia błon śluzowych sitowia z bezpowietrzniścią pojedynczych komórek sitowia."
+              "text": "Drobne pogrubienia błon śluzowych sitowia z bezpowietrzniścią pojedynczych komórek sitowia.",
+              "newline": true
             }
           ]
         },
@@ -106,37 +111,55 @@
           "name": "klasyfikacja kerosa",
           "parts": [
             {
-              "text": "Głębokość rowków węchowych wg. klasyfikacji Kerosa: po stronie prawej "
+              "text": "Głębokość rowków węchowych wg. klasyfikacji Kerosa: po stronie prawej ",
+              "newline": true
             },
             {
               "choices": [
-                "1mm",
-                "2mm",
-                "3mm",
-                "4mm",
-                "5mm",
-                "6mm",
-                "7mm",
-                "8mm",
-                "9mm",
-                "10mm",
-                "11mm",
-                "12mm",
-                "13mm",
-                "14mm",
-                "15mm"
-              ]
+                "1mm-typ I",
+                "2mm-typ I",
+                "3mm-typ I",
+                "4mm-typ II",
+                "5mm-typ II",
+                "6mm-typ II",
+                "7mm-typ II",
+                "8mm-typ III",
+                "9mm-typ III",
+                "10mm-typ III",
+                "11mm-typ III",
+                "12mm-typ III",
+                "13mm-typ III",
+                "14mm-typ III",
+                "15mm-typ III",
+                "16mm-typ III"
+              ],
+              "newline": false
+            },
+            {
+              "text": " Po stronie lewej ",
+              "newline": false
             },
             {
               "choices": [
-                "typ I",
-                "typ II",
-                "typ III"
-              ]
+                "1mm-typ I",
+                "2mm-typ I",
+                "3mm-typ I",
+                "4mm-typ II",
+                "5mm-typ II",
+                "6mm-typ II",
+                "7mm-typ II",
+                "8mm-typ III",
+                "9mm-typ III",
+                "10mm-typ III",
+                "11mm-typ III",
+                "12mm-typ III",
+                "13mm-typ III",
+                "14mm-typ III",
+                "15mm-typ III",
+                "16mm-typ III"
+              ],
+              "newline": false
             },
-            {
-              "text": "Po stronie lewej 5mm- typ II"
-            }
           ]
         }
       ]
@@ -169,7 +192,10 @@
                 const button = document.createElement('button');
                 button.textContent = part.text;
                 button.addEventListener('click', () => {
-                  commentTextarea.value += part.text + '\n';
+                  if (part.newline == true) {
+                    commentTextarea.value += '\n';
+                  };
+                  commentTextarea.value += part.text;
                 });
                 buttonsContainer.appendChild(button);
               } else if (part.choices) {
@@ -191,7 +217,10 @@
                 okButton.classList.add('dropdown-button');
                 okButton.addEventListener('click', () => {
                   const selectedValue = dropdownSelect.value;
-                  commentTextarea.value += selectedValue + '\n';
+                  if (part.newline == true) {
+                    commentTextarea.value += '\n';
+                  };
+                  commentTextarea.value += selectedValue;
                 });
                 dropdownContainer.appendChild(okButton);
 
