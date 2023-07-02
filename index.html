@@ -1,1 +1,191 @@
-Hello, Jack!
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slider Example</title>
+  <style>
+    /* CSS for the slider container */
+    .slider-container {
+      width: 500px;
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* CSS for individual slides */
+    .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transition: transform 0.5s ease-in-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+    }
+
+    /* CSS for the textarea */
+    textarea {
+      width: 100%;
+      height: 100px;
+      box-sizing: border-box;
+      padding: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-container">
+    <div id="slider" class="slide"></div>
+  </div>
+
+  <button id="prevBtn" disabled>Previous</button>
+  <button id="nextBtn">Next</button>
+
+  <textarea id="commentTextarea" placeholder="Brak treści"></textarea>
+
+  <script>
+    const jsonData = {
+      "Zatoki czolowe": [
+        {
+          "name": "droznosc",
+          "parts": [
+            {
+              "text": "Zatoki czołowe o zachowanej powietrzności, zachyłki czołowe o zachowanej drożności."
+            }
+          ]
+        },
+        {
+          "name": "pogrubienia",
+          "parts": [
+            {
+              "text": "Drobne pogrubienia błon śluzowych zatok czolowych od strony zachylków zębodolowych."
+            }
+          ]
+        },
+        {
+          "name": "niedrozne",
+          "parts": [
+            {
+              "text": "Drobne pogrubienia błon śluzowych zatok czolowych od strony zachylków zębodolowych."
+            }
+          ]
+        }
+      ],
+      "Sitowie": [
+        {
+          "name": "zachowane",
+          "parts": [
+            {
+              "text": "Sitowie o zachowanej powietrzności."
+            }
+          ]
+        },
+        {
+          "name": "pogrubienia",
+          "parts": [
+            {
+              "text": "Drobne pogrubienia błon śluzowych sitowia z bezpowietrzniścią pojedynczych komórek sitowia."
+            }
+          ]
+        },
+        {
+          "name": "klasyfikacja kerosa",
+          "parts": [
+            {
+              "text": "Głębokość rowków węchowych wg. klasyfikacji Kerosa: po stronie prawej "
+            },
+            {
+              "choices": [
+                "1mm",
+                "2mm",
+                "3mm",
+                "4mm",
+                "5mm",
+                "6mm",
+                "7mm",
+                "8mm",
+                "9mm",
+                "10mm",
+                "11mm",
+                "12mm",
+                "13mm",
+                "14mm",
+                "15mm"
+              ]
+            },
+            {
+              "choices": [
+                "typ I",
+                "typ II",
+                "typ III"
+              ]
+            },
+            {
+              "text": "Po stronie lewej 5mm - typ II"
+            }
+          ]
+        }
+      ]
+    };
+
+    const slider = document.getElementById('slider');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const commentTextarea = document.getElementById('commentTextarea');
+    const keys = Object.keys(jsonData);
+    let currentIndex = 0;
+    let buttonsContainer = document.createElement('div');
+
+    function updateSlide() {
+      slider.textContent = keys[currentIndex];
+
+      // Clear textarea content
+      commentTextarea.value = commentTextarea.value;
+
+      // Remove previous buttons
+      buttonsContainer.innerHTML = '';
+
+      // Create buttons for each "text" key in the current slide
+      const slide = jsonData[keys[currentIndex]];
+      if (slide) {
+        slide.forEach((item) => {
+          if (item.parts) {
+            item.parts.forEach((part) => {
+              if (part.text) {
+                const button = document.createElement('button');
+                button.textContent = part.text;
+                button.addEventListener('click', () => {
+                  commentTextarea.value += part.text + '\n';
+                });
+                buttonsContainer.appendChild(button);
+              }
+            });
+          }
+        });
+      }
+
+      // Append buttons container to the DOM
+      commentTextarea.insertAdjacentElement('afterend', buttonsContainer);
+
+      // Enable or disable buttons based on current slide index
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === keys.length - 1;
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % keys.length;
+      updateSlide();
+    }
+
+    function previousSlide() {
+      currentIndex = (currentIndex - 1 + keys.length) % keys.length;
+      updateSlide();
+    }
+
+    updateSlide();
+
+    prevBtn.addEventListener('click', previousSlide);
+    nextBtn.addEventListener('click', nextSlide);
+  </script>
+</body>
+</html>
