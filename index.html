@@ -60,7 +60,7 @@
 
   <script>
     const jsonData = {
-        "Rodzaj badania": [
+      "Rodzaj badania": [
         {
           "name": "bez kontrastu",
           "parts": [
@@ -78,12 +78,9 @@
               "newline": true
             }
           ]
-        },
+        }
       ],
-
-
-
-        "Najlepszy kumpel Jacusia": [
+      "Najlepszy kumpel Jacusia": [
         {
           "name": "dobry kumpel",
           "parts": [
@@ -93,16 +90,13 @@
                 "kOndi",
                 "koNdi",
                 "konDi",
-                "kondI",
+                "kondI"
               ],
               "newline": true
-            },
+            }
           ]
         }
       ],
-
-
-
       "Zatoki czolowe": [
         {
           "name": "droznosc",
@@ -199,7 +193,8 @@
           ]
         }
       ]
-    };
+    }
+
 
     const slider = document.getElementById('slider');
     const prevBtn = document.getElementById('prevBtn');
@@ -251,7 +246,7 @@
                 const okButton = document.createElement('button');
                 okButton.textContent = 'OK';
                 okButton.classList.add('dropdown-button');
-                okButton.addEventListener('click', () => {
+                dropdownSelect.addEventListener('change', () => {
                   const selectedValue = dropdownSelect.value;
                   if (part.newline == true) {
                     commentTextarea.value += '\n';
