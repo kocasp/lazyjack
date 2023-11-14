@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
   <meta charset="utf-8">
@@ -11,17 +11,20 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h3 id="slider" class="slide"></h3>
-        <button id="prevBtn" disabled class="btn btn-secondary">Previous</button>
-        <button id="nextBtn" class="btn btn-secondary">Next</button>
-        <hr>
-      </div>
-    </div>
+  <header class="text-center sticky-top" style="background-color: #9461fb;">
+    <div><small>LazyJack v3</small></div>
+  </header>
+  <div class="container mt-4">
     <div class="row">
       <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 text-left">
+            <h3 id="slider" class="slide mt-2"></h3>
+            <button id="prevBtn" disabled class="btn btn-secondary"><<</button>
+            <button id="nextBtn" class="btn btn-warning">>>>></button>
+            <hr>
+          </div>
+        </div>
         <div class="row">
           <div id="buttonsContainer" class="col-md-12"></div>
           

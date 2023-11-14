@@ -46,6 +46,7 @@ const jsonData = {
       "name": "1.2",
       "parts": [
         {
+          "description": "Hipoplazje",
           "choices": [
             "Zatoki czołowe o zachowanej powietrzności.",
             "Hipoplazja prawej zatoki czołowej.",
