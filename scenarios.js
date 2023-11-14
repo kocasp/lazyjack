@@ -33,6 +33,7 @@ const jsonData = {
       "name": "1.1",
       "parts": [
         {
+          "description": "Wykształcenie",
           "choices": [
             "Zatoki oboczne nosa wykształcone prawidłowo.",
             "Ubytki ścian przyśrodkowych zatok szczękowych, ściany przedniej zatoki klinowej, przegrody nosa, komórek sitowia oraz asymetria małżowin nosowych środkowych- o obrazie zmian pooperacyjnych."

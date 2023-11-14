@@ -12,34 +12,47 @@ function appendToTextarea(text, newline) {
 
 function createButton(text, newline) {
     const button = document.createElement('button');
+    button.classList.add('btn', 'btn-sm');
+    button.classList.add('btn-secondary');
+    button.classList.add('mb-2');
     button.textContent = text;
     button.addEventListener('click', () => appendToTextarea(text, newline));
     return button;
 }
 
 function createDropdown(part) {
-    const dropdownContainer = document.createElement('div');
-    dropdownContainer.classList.add('dropdown-container');
+    // const dropdownContainer = document.createElement('div');
+    // dropdownContainer.classList.add('dropdown-container');
 
-    const dropdownSelect = document.createElement('select');
-    dropdownSelect.classList.add('dropdown-select');
+    const dropdownSelect = document.createElement('div');
+    dropdownSelect.classList.add('dropdown', 'mb-2');
+    const dropdownButton = document.createElement('button');
+    dropdownButton.classList.add('btn', 'btn-sm', 'btn-secondary', 'dropdown-toggle');
+    dropdownButton.setAttribute('type', 'button');
+    dropdownButton.setAttribute('data-bs-toggle', 'dropdown');
+    dropdownButton.setAttribute('aria-expanded', 'false');
+    dropdownButton.innerHTML = part.description;
+    dropdownSelect.appendChild(dropdownButton);
+    const dropdownMenu = document.createElement('ul');
+    dropdownMenu.classList.add('dropdown-menu');
+
+    // dropdownSelect.classList.add('dropdown-select');
     part.choices.forEach(choice => {
-        const option = document.createElement('option');
-        option.value = choice;
-        option.textContent = choice;
-        dropdownSelect.appendChild(option);
+        const dropdownItemLi = document.createElement('li');
+        const dropdownItem = document.createElement('a');
+        dropdownItem.setAttribute('href', '#');
+        dropdownItem.classList.add('dropdown-item');
+        dropdownItem.textContent = choice;
+        dropdownItem.addEventListener('click', () => {
+            appendToTextarea(dropdownItem.textContent, part.newline);
+        });
+        dropdownItemLi.appendChild(dropdownItem);
+        dropdownMenu.appendChild(dropdownItemLi);
     });
-    dropdownContainer.appendChild(dropdownSelect);
+    dropdownSelect.appendChild(dropdownMenu);
+    // dropdownContainer.appendChild(dropdownSelect);
 
-    const okButton = document.createElement('button');
-    okButton.textContent = 'OK';
-    okButton.classList.add('dropdown-button');
-    okButton.addEventListener('click', () => {
-        appendToTextarea(dropdownSelect.value, part.newline);
-    });
-    dropdownContainer.appendChild(okButton);
-
-    return dropdownContainer;
+    return dropdownSelect;
 }
 
 function updateSlide() {
@@ -52,12 +65,11 @@ function updateSlide() {
             item.parts.forEach(part => {
                 if (part.text) {
                     buttonsContainer.appendChild(createButton(part.text, part.newline));
+                    buttonsContainer.appendChild(document.createElement("br"));
                 } else if (part.choices) {
                     buttonsContainer.appendChild(createDropdown(part));
                 }
             });
-            buttonsContainer.appendChild(document.createElement("br"));
-            buttonsContainer.appendChild(document.createElement("br"));
         });
     }
 
