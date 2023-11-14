@@ -4,7 +4,7 @@ const nextBtn = document.getElementById('nextBtn');
 const commentTextarea = document.getElementById('commentTextarea');
 const keys = Object.keys(jsonData);
 let currentIndex = 0;
-const buttonsContainer = document.createElement('div');
+const buttonsContainer = document.getElementById('buttonsContainer');
 
 function appendToTextarea(text, newline) {
     commentTextarea.value += (newline ? '\n' : '') + text;
@@ -61,7 +61,7 @@ function updateSlide() {
         });
     }
 
-    commentTextarea.insertAdjacentElement('afterend', buttonsContainer);
+    // commentTextarea.insertAdjacentElement('afterend', buttonsContainer);
     prevBtn.disabled = currentIndex === 0;
     nextBtn.disabled = currentIndex === keys.length - 1;
 }
