@@ -1,0 +1,42 @@
+/* CSS for the slider container */
+.slider-container {
+    width: 500px;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* CSS for individual slides */
+.slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: transform 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+/* CSS for the textarea */
+textarea {
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* CSS for dropdowns */
+.dropdown-container {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-select {
+    margin-right: 10px;
+}
+
+.dropdown-button {
+    margin-left: 10px;
+}
