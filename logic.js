@@ -86,4 +86,11 @@ function changeSlide(step) {
 prevBtn.addEventListener('click', () => changeSlide(-1));
 nextBtn.addEventListener('click', () => changeSlide(1));
 
+window.addEventListener('keydown', function (event) {
+    // Check if the F5 key (key code 116) was pressed
+    if (event.keyCode === 116) {
+      event.preventDefault(); // Prevent the default browser refresh action
+    }
+  });
+
 updateSlide();
